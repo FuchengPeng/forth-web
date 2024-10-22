@@ -60,7 +60,20 @@ body {
   }
 }
 
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
 /* 应用动画 */
 #alice-container img {
   animation: float 3s ease-in-out infinite;
+}
+
+#alice4, #alice5 {
+  animation: pulse 2s infinite;
 }
