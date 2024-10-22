@@ -28,6 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
           el.style.animation = `${aliceTiming.duration / 2}s infinite blink`; // 重新应用闪烁动画
         }
       });
+
+      // 依次执行旋转消失动画
+      let animationIndex = 0;
+      const animationSequence = () => {
+        if (animationIndex < aliceElements.length) {
+          const currentElement = aliceElements[animationIndex];
+          currentElement.animate(aliceTumbling, aliceTiming).onfinish = () => {
+            animationIndex++;
+            animationSequence();
+          };
+        }
+      };
+      animationSequence();
+
       animationRunning = true;
       startButton.textContent = 'Stop Animation';
     } else {
