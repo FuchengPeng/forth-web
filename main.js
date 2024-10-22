@@ -6,15 +6,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const aliceTiming = {
     duration: 2000,
-    iterations: Infinity, // 无限循环
-    easing: 'ease-in-out', // 平滑动画效果
+    iterations: 1,
+    easing: 'ease-in-out',
     fill: 'forwards'
   };
 
   const aliceElements = document.querySelectorAll('#alice-container img');
-  aliceElements.forEach((el, index) => {
-    const delay = index * 500; // 每个动画延迟500ms
-    el.style.animationDelay = `${delay}ms`;
-    el.animate(aliceTumbling, aliceTiming);
+  const startButton = document.getElementById('startButton');
+  let animationRunning = false;
+
+  startButton.addEventListener('click', () => {
+    if (!animationRunning) {
+      aliceElements.forEach((el, index) => {
+        const delay = (index < 3) ? index * 500 : 0; // 前三个有延迟，后两个立即开始闪烁
+        el.style.animationDelay = `${delay}ms`;
+        if (index < 3) {
+          el.animate(aliceTumbling, aliceTiming);
+        } else {
+          el.style.animation = 'none'; // 重置闪烁动画
+          el.offsetHeight; // 触发重绘
+          el.style.animation = `${aliceTiming.duration / 2}s infinite blink`; // 重新应用闪烁动画
+        }
+      });
+      animationRunning = true;
+      startButton.textContent = 'Stop Animation';
+    } else {
+      aliceElements.forEach(el => {
+        el.getAnimations().forEach(animation => animation.cancel());
+        el.style.animation = 'none';
+      });
+      animationRunning = false;
+      startButton.textContent = 'Start Animation';
+    }
   });
 });
