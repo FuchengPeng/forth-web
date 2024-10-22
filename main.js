@@ -1,19 +1,20 @@
-const aliceTumbling = [
-  { transform: 'rotate(0) scale(1)' },
-  { transform: 'rotate(360deg) scale(0)' }
-];
+document.addEventListener('DOMContentLoaded', () => {
+  const aliceTumbling = [
+    { transform: 'rotate(0) scale(1)' },
+    { transform: 'rotate(360deg) scale(0)' }
+  ];
 
-const aliceTiming = {
-  duration: 2000,
-  iterations: 1,
-  fill: 'forwards'
-}
+  const aliceTiming = {
+    duration: 2000,
+    iterations: Infinity, // 无限循环
+    easing: 'ease-in-out', // 平滑动画效果
+    fill: 'forwards'
+  };
 
-const alice1 = document.querySelector("#alice1");
-const alice2 = document.querySelector("#alice2");
-const alice3 = document.querySelector("#alice3");
-
-alice1.animate(aliceTumbling, aliceTiming).finished
-  .then(() => alice2.animate(aliceTumbling, aliceTiming).finished)
-  .then(() => alice3.animate(aliceTumbling, aliceTiming).finished)
-  .catch(error => console.error(`Error animating Alices: ${error}`));
+  const aliceElements = document.querySelectorAll('#alice-container img');
+  aliceElements.forEach((el, index) => {
+    const delay = index * 500; // 每个动画延迟500ms
+    el.style.animationDelay = `${delay}ms`;
+    el.animate(aliceTumbling, aliceTiming);
+  });
+});
