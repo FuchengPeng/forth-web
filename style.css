@@ -1,8 +1,15 @@
+:root {
+  --background-color: #6c373f;
+  --highlight-color: #ff6b6b;
+}
+
 body {
-  background: #6c373f;
+  background: var(--background-color);
   display: flex;
   justify-content: center;
-  }
+  margin: 0;
+  height: 100vh;
+}
 
 #alice-container {
   width: 90vh;
@@ -12,6 +19,15 @@ body {
     "a1 . ."
     ". a2 ."
     ". . a3";
+}
+
+img {
+  filter: drop-shadow(2px 4px 6px black); /* 添加阴影效果 */
+  transition: transform 0.3s ease; /* 悬停时的平滑过渡效果 */
+}
+
+img:hover {
+  transform: scale(1.1); /* 悬停时放大 */
 }
 
 #alice1 {
