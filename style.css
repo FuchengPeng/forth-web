@@ -1,56 +1,66 @@
-:root {
-  --background-color: #6c373f;
-  --highlight-color: #ff6b6b;
-}
-
+/* 基础样式 */
 body {
-  background: linear-gradient(135deg, #6c373f, #ff6b6b);
+  background: url('33.jpg') no-repeat center center fixed;
+  background-size: cover;
   display: flex;
   justify-content: center;
-  margin: 0;
+  align-items: center;
   height: 100vh;
-  overflow: hidden;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
 }
 
 #alice-container {
-  width: 90vh;
   display: grid;
-  place-items: center;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 10px;
+  gap: 20px;
+  padding: 20px;
 }
 
-img {
-  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
-  transition: transform 0.3s ease, opacity 0.3s ease;
+/* 图片样式 */
+#alice-container img {
+  width: 100px;
+  border-radius: 10px; /* 圆角边框 */
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
-img:hover {
+#alice-container img:hover {
   transform: scale(1.1);
-  opacity: 0.8;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* 鼠标悬停时的光晕效果 */
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-#alice4, #alice5 {
-  animation: blink 2s infinite;
-}
-
-/* 对角线排列 */
+/* 网格位置 */
 #alice1 {
-  grid-area: 1 / 1 / 2 / 3;
+  grid-area: 1 / 1;
 }
 
 #alice2 {
-  grid-area: 2 / 3 / 3 / 1;
-  animation-delay: 500ms;
+  grid-area: 2 / 2;
 }
 
 #alice3 {
-  grid-area: 3 / 2 / 1 / 2;
-  animation-delay: 1000ms;
+  grid-area: 3 / 3;
+}
+
+#alice4 {
+  grid-area: 2 / 3;
+}
+
+#alice5 {
+  grid-area: 3 / 1;
+}
+
+/* 动画效果 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* 应用动画 */
+#alice-container img {
+  animation: float 3s ease-in-out infinite;
 }
